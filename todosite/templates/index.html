@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>{{title}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ===== CENTERED CUTE PINK THEME ===== */
+    :root {
+      --bg: #fdf6ff;
+      --card: #ffffff;
+      --accent: #ff9ecb;
+      --accent-dark: #ff6aa4;
+      --text: #444;
+      --soft: #ffe5f3;
+    }
+
+    body {
+      background: var(--bg);
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .container {
+      margin-top: 50px;
+      max-width: 480px;
+      width: 90%;
+      background: var(--card);
+      padding: 35px 30px;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(255, 170, 210, 0.4);
+      position: relative;
+      z-index: 10;
+      animation: fadeIn 0.7s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      color: var(--accent-dark);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    hr {
+      border-top: 2px solid #ffe5f3;
+      width: 80%;
+      margin: auto;
+    }
+
+    /* Task cards */
+    .card {
+      background: var(--soft);
+      border-radius: 16px;
+      padding: 25px 30px;
+      margin-bottom: 15px;
+      box-shadow: 0 5px 15px rgba(255, 170, 210, 0.3);
+      transition: all 0.3s ease-in-out;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 170, 210, 0.4);
+    }
+
+    .card b {
+      color: var(--accent-dark);
+      display: block;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .card hr {
+      border-top: 1px solid #ffd6e8;
+      margin: 5px 0;
+    }
+
+    /* Submit form */
+    .submit_form {
+      background: var(--soft);
+      border-radius: 16px;
+      padding: 10px 40px 20px 20px;
+      margin-top: 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(255, 170, 210, 0.3);
+    }
+
+    .submit_form:hover {
+      box-shadow: 0 8px 20px rgba(255, 170, 210, 0.4);
+    }
+
+    /* Inputs */
+    form input[type="text"],
+    form textarea,
+    form select {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #ffc0d6;
+      padding: 10px ;
+      margin-bottom: 10px;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    form input[type="text"]:focus,
+    form textarea:focus,
+    form select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    /* Buttons */
+    .btn-default {
+      background-color: var(--accent);
+      color: white;
+      border-radius: 25px;
+      padding: 8px 20px;
+      border: none;
+      font-weight: 500;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn-default:hover {
+      background-color: var(--accent-dark);
+    }
+
+    .btn-primary {
+      border-radius: 25px;
+      padding: 6px 16px;
+      background-color: #ff6aa4;
+      border: none;
+      font-weight: 500;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-color: #ff4c84;
+    }
+
+    /* Alerts */
+    .alert {
+      border-radius: 12px;
+      margin-top: 15px;
+      font-size: 0.95em;
+      background: var(--soft);
+      border: 1px solid var(--accent);
+      color: var(--accent-dark);
+    }
+
+    /* Bubble animations */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--soft);
+      z-index: -1;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    .bubble.b1 { width: 120px; height:120px; top:-50px; left:-40px; animation-delay: 0s; }
+    .bubble.b2 { width: 80px; height:80px; bottom:-40px; right:-20px; animation-delay: 1s; }
+    .bubble.b3 { width: 55px; height:55px; top:20px; right:-10px; animation-delay: 2s; }
+
+    /* Delete icon */
+    .card form button i,
+    li i {
+      cursor: pointer;
+      color: var(--accent-dark);
+      font-size: 18px;
+      transition: 0.15s;
+    }
+
+    .card form button i:hover,
+    li i:hover {
+      transform: scale(1.2);
+    }
+    
+    /* Mobile */
+    @media (max-width: 480px) {
+      .container { padding: 20px; }
+      h1 { font-size: 24px; }
+    }
+    /* Make messages container above everything */
+.alert-container {
+  position: relative;
+  z-index: 30; /* higher than bubbles */
+  margin-bottom: 15px;
+}
+
+/* Form always above bubbles */
+.submit_form {
+  position: relative;
+  z-index: 30;
+  margin-bottom: 25px;
+}
+
+/* Cards above bubbles */
+.card {
+  position: relative;
+  z-index: 20;
+  background: var(--soft);
+  padding: 25px 30px;
+  border-radius: 16px;
+  margin-bottom: 15px;
+  box-shadow: 0 5px 15px rgba(255, 170, 210, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Bubbles stay behind */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--soft);
+  z-index: -1; /* behind everything */
+  animation: float 6s infinite ease-in-out;
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- Cute bubbles -->
+  <div class="bubble b1"></div>
+  <div class="bubble b2"></div>
+  <div class="bubble b3"></div>
+
+<div class="container">
+
+  <!-- Messages at top -->
+  {% if messages %}
+    <div class="alert-container">
+      {% for message in messages %}
+        <div class="alert alert-info">
+          <strong>{{message}}</strong>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Add task form at top -->
+  <div class="submit_form">
+    <h1>Create Task</h1>
+    <form method="POST">
+      {% csrf_token %}
+      {{forms}}
+      <input type="submit" class="btn btn-default" value="Add Task">
+    </form>
+  </div>
+
+  <h1>TODO LIST</h1>
+  <hr />
+
+  <!-- Task list -->
+  {% for i in list %}
+    <div class="card">
+      <b>{{ i.title }}</b>
+      <hr/>
+      {{ i.date }}
+      <hr/>
+      {{ i.details }}
+      <form action="/del/{{i.id}}" method="POST" style="margin-top:10px;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">
+          <i class="fa-solid fa-trash"></i> &nbsp; Remove
+        </button>
+      </form>
+    </div>
+  {% endfor %}
+
+</div>
+
+
+</body>
+</html>
